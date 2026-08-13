@@ -1,47 +1,88 @@
 # INSAFEDARE Web Application
 
-## Evaluation Version
+## Testing Version
 
-This package contains the standalone **INSAFEDARE Web Application** as a Java FAT JAR.
+This repository provides the **INSAFEDARE Web Application** for testing by INSAFEDARE project partners.
 
-This version is intended for evaluation and demonstration by INSAFEDARE project partners.
+The application is distributed as a standalone Java FAT JAR and can be launched locally from a terminal and accessed through a web browser.
+
+## Download the Application
+
+The application JAR is available under **GitHub Releases** and is therefore not displayed directly among the repository files.
+
+### Download v1.0
+
+Go to:
+
+https://github.com/sydgep/insafedare-web-application/releases/tag/v1.0
+
+Under **Assets**, download:
+
+```text
+insafedare-web-application-v1.jar
+```
+
+Alternatively, from the main repository page:
+
+1. Locate **Releases** on the right-hand side of the repository.
+2. Select **v1.0**.
+3. Expand **Assets** if necessary.
+4. Download `insafedare-web-application-v1.jar`.
+
+---
 
 ## 1. Prerequisites
 
 ### Java
 
-Java **17 or newer** is required. Java 21 is recommended.
+Java **17 or newer** is required. **Java 21 is recommended.**
 
-Check your Java installation:
+On Ubuntu/Debian Linux, Java 21 can be installed using:
+
+```bash
+sudo apt update
+sudo apt install openjdk-21-jdk
+```
+
+After installation, verify the Java version:
 
 ```bash
 java -version
 ```
 
-### Operating System
+You should see a version similar to:
 
-The application has been tested in a Linux environment. A Linux system with Bash and Java 17+ is recommended.
+```text
+openjdk version "21.x.x"
+```
+
+If Java 17 or newer is already installed, you can skip the installation step.
+
+---
 
 ## 2. Package Contents
 
-The distribution should contain:
+After downloading the application, you only need the JAR file:
 
 ```text
 INSAFEDARE-Web-Application/
-├── insafedare-web-application-v1.jar
-└── README.md
+└── insafedare-web-application-v1.jar
 ```
 
-The `.jar` is a Java FAT JAR containing the application and its Java dependencies.
+The `.jar` is a Java FAT JAR containing the application and its required Java dependencies.
 
-**Maven, Node.js, npm, and the application source code are not required to launch the application.**
+Maven, Node.js, npm, and the application source code are **not required** to launch the application.
+
+---
 
 ## 3. Launching the Application
 
-Open a terminal and navigate to the directory containing the JAR:
+Open a terminal and navigate to the directory containing the downloaded JAR.
+
+For example, if the JAR is in your Downloads directory:
 
 ```bash
-cd /path/to/INSAFEDARE-Web-Application
+cd ~/Downloads
 ```
 
 Launch the application:
@@ -52,89 +93,94 @@ java -jar insafedare-web-application-v1.jar
 
 Keep the terminal open while the application is running.
 
+Wait for the application to finish starting before accessing the web interface.
+
+---
+
 ## 4. Accessing the Application
 
-After the application has finished starting, open a web browser and go to:
+Once the application has started, open a web browser and go to:
 
 ```text
 http://localhost:8080
 ```
 
+The **INSAFEDARE Web Application** should now be accessible.
+
+---
+
 ## 5. Stopping the Application
 
-The application runs in the foreground.
+The application runs in the foreground of the terminal.
 
-To stop it, press:
+To stop it, return to the terminal where the application is running and press:
 
 ```text
 Ctrl+C
 ```
 
-## 6. Changing the Application Port
+---
 
-The default port is **8080**.
+## 6. Troubleshooting
 
-If port 8080 is already in use, launch the application on another port. For example:
+### Java command not found
 
-```bash
-java -jar insafedare-web-application-v1.jar --server.port=8082
-```
-
-Then access:
-
-```text
-http://localhost:8082
-```
-
-## 7. Troubleshooting
-
-### Java is not installed
-
-If you see:
-
-```text
-java: command not found
-```
-
-check:
+If:
 
 ```bash
 java -version
 ```
 
-Install Java 17 or newer and try again.
+returns an error such as:
+
+```text
+java: command not found
+```
+
+install Java 21:
+
+```bash
+sudo apt update
+sudo apt install openjdk-21-jdk
+```
+
+Then verify the installation:
+
+```bash
+java -version
+```
 
 ### Port 8080 is already in use
 
-If the application reports:
+If the application fails to start with a message similar to:
 
 ```text
 Web server failed to start. Port 8080 was already in use.
 ```
 
-either stop the application using port 8080 or use another port:
+another application is already using port `8080`.
+
+You can either stop the process using port 8080 or launch INSAFEDARE on another port, for example:
 
 ```bash
 java -jar insafedare-web-application-v1.jar --server.port=8082
 ```
 
+Then access the application at:
+
+```text
+http://localhost:8082
+```
+
 ### Application does not start
 
-Keep the complete terminal output and provide it to the INSAFEDARE development team. The startup log will help identify the problem.
+If the application does not start successfully, keep the complete terminal output and provide it to the INSAFEDARE development team. The startup logs can be used to identify the problem.
 
-## 8. Important Notes
+---
 
-- This is the **INSAFEDARE Web Application Evaluation Version**.
-- The application is distributed as a Java FAT JAR.
-- The application is launched directly using Java.
-- No Maven, Node.js, npm, or source code is required.
-- The application is accessed through a web browser.
-- The application is stopped with `Ctrl+C`.
-- The default address is `http://localhost:8080`.
+## Quick Start
 
-## 9. Quick Start
-
-If Java 17+ is already installed:
+If Java 17 or newer is already installed:
 
 ```bash
 java -version
@@ -147,12 +193,8 @@ Then open:
 http://localhost:8080
 ```
 
-To stop the application:
+To stop the application, press `Ctrl+C` in the terminal.
 
-```text
-Ctrl+C
-```
+---
 
-## 10. Version
-
-**INSAFEDARE Web Application — Evaluation Version v1**
+**INSAFEDARE Web Application — Testing Version v1.0**
