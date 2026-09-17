@@ -2,49 +2,46 @@
 
 [← Back to the main README](../README.md)
 
-INSAFEDARE provides a graphical interface for assembling data-processing components into an executable workflow.
+## 1. Create and configure a pipeline
 
-## 1. Create a project and pipeline
-
-1. Launch INSAFEDARE and open <http://localhost:8080>.
-2. Create a new project from the projects page and give it a meaningful name.
-3. Open the project and create a new pipeline.
-4. Give the pipeline a short, descriptive name.
-
-## 2. Configure the pipeline
-
-At pipeline level, users configure the directories used to locate source data and store generated results.
+1. From the **Front** page, create a new project and give it a meaningful name.
+2. Open the project and create a new pipeline.
+3. At the pipeline level, configure the directories used to locate source data and store generated results.
 
 | Parameter | Description | Default value |
 |---|---|---|
 | `Name` | Name of the pipeline. | `SynDataPipelines` |
 | `Comments` | Optional description or notes about the pipeline. | — |
 | `Source Directory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
-| `Target Directory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
+| `Target Directory` | Directory used to store intermediate and final pipeline outputs. | `local_volume_mount` |
 | `Capture Metadata` | Enables FAIR-aware metadata capture. | Disabled |
 | `Use DVC` | Enables dataset and output versioning with DVC. | Disabled |
 
-## 3. Add components and Connect the workflow
+## 2. Add and Connect Components
 
-1. From the `Explorer` view (on the left-hand side), click on the three-dots of the `SynDataPipelines` or the name use used.
-2. Click on `New object`, you will see "Create a new object"
-3. Select the component e.g `File Extraction`, (you can expand the inverted triangle too see all the components)
-4. Click on `CREATE`. It will instantiate a block on the Pipeline Diagram View ( At the center).
-5. Go to the Details view (on the right hand-side) to fill in the input parameters of the component.
-6. Add another components and connect them. The output of the first block is directly passed as an input to the subsequent component.
+1. In the **Explorer** view on the left-hand side, locate `SynDataPipelines` or the name assigned to your pipeline.
+2. Click the **⋮** menu next to the pipeline name.
+3. Select **New object** to open the **Create a new object** window.
+4. Select a component, such as `File Extraction`. You can expand the categories to view all available components.
+5. Click **CREATE**. A new component block will appear in the **Pipeline Diagram** at the centre of the interface.
+6. Select the component block and use the **Details** view on the right-hand side to configure its parameters.
+7. Repeat these steps to add the remaining components.
+8. Connect the components in their required execution order.
+9. The output of each component is automatically passed to the next connected component.
 
-Detailed information about the components can be find [Here](pipeline-components.md).
+Detailed information about the available components, their parameters, and outputs is provided in the **[Pipeline Components](pipeline-components.md)** guide.
 
-## 4. Generate code and execute
+## 3. Generate and Execute the Pipeline
 
-1. Click on the `three-dots` at the root of the Explorer view
-2. Click on `Generate Code`
-3. Click on `START SERVER` to start the prefect server.
-4. Click on `EXECUTE CODE`
+1. Click the **⋮** menu next to the root element in the **Explorer** view.
+2. Select **Generate Code**.
+3. Click **START SERVER** to start the Prefect server.
+4. Click **EXECUTE CODE** to run the generated pipeline.
 
-## 5. Monitor the pipeline execution on prefect UI
+## 4. Monitor Pipeline Execution
 
-1. Access the prefect server from the application or by pasting `http://127.0.0.1:4200` on your web browser.
-2. Go to the configured "Target Directory" to see the outputs files.
+1. Open the Prefect interface from within the application or visit <http://127.0.0.1:4200> in your web browser.
+2. Use the Prefect interface to monitor flow runs, task execution, logs, and errors.
+3. Open the configured `Target Directory` to access the intermediate and final output files.
 
-For common problems, see the [troubleshooting guide](troubleshooting.md).
+For solutions to common problems, see the **[Troubleshooting Guide](troubleshooting.md)**.
