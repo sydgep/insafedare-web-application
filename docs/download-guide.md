@@ -22,10 +22,6 @@ The application is distributed as a standalone Java FAT JAR through **GitHub Rel
 
 The `.jar` file contains the INSAFEDARE application and its Java dependencies. It is launched from a terminal; it is not opened by double-clicking.
 
-Java and Docker are still required on the computer. Continue with the [prerequisites guide](prerequisites.md).
-
-## Download example pipelines
-
-If example pipelines are supplied in the repository, download the required pipeline file from the `examples/` folder. Keep it in a location you can select later from the INSAFEDARE upload interface.
+Java and Docker are still required on the computer.
 
 Next: **[Install Prerequisites →](prerequisites.md)**
