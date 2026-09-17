@@ -4,8 +4,6 @@
 
 INSAFEDARE provides reusable components for constructing tabular-data and medical-image pipelines. Each component performs a defined operation and can be connected to compatible components through the graphical pipeline editor.
 
-This reference summarizes the purpose, inputs, parameters, and outputs of the components included in the current testing version.
-
 ## Common Pipeline Configuration
 
 At pipeline level, users configure the directories used to locate source data and store generated results.
@@ -19,41 +17,22 @@ At pipeline level, users configure the directories used to locate source data an
 | `captureMetadata` | Enables FAIR-aware metadata capture. | `false` |
 | `useDVC` | Enables dataset and output versioning with DVC. | `false` |
 
-Every pipeline component also has a name, optional comments, an activation setting, and connections to its preceding and following components.
-
 ## Data Ingestion
 
 | Component | Purpose | Input | Parameters | Output |
 |---|---|---|---|---|
-| **File Extraction** | Ingests data from supported file formats, optionally extracts selected columns, and converts the result into the standard pipeline format. | CSV, JSON, Parquet, TXT, XLS, or XLSX file. Gzip and ZIP compression are supported. | `inputFile`: source filename or path.<br>`columns`: columns to retain; all columns are retained when none are specified. | Parquet file containing the selected data. |
+| **File Extraction** | Ingests data from supported source files, optionally extracts selected columns. | CSV, JSON, Parquet, TXT, XLS, or XLSX file. Gzip and ZIP compression are supported. | `inputFile`: source filename. <br>`columns`: columns to retain; all columns are retained when none are specified. | Parquet file containing the selected data. |
 | **Database Extraction** | Connects to a PostgreSQL database and extracts selected columns from a table. | PostgreSQL database table. | `host`, `port`, `username`, `password`, `databaseName`, `schema`, `tableName`, `columns` | Extracted dataset in Parquet format. |
 | **API Extraction** | Retrieves records from an API response and extracts the requested fields. | API endpoint returning structured data. | `url`: API endpoint.<br>`recordPath`: path to the records in the response.<br>`columns`: fields to retain. | Extracted dataset in Parquet format. |
 
-### File Extraction format support
-
-The File Extraction component supports:
-
-- CSV;
-- JSON;
-- Parquet;
-- plain-text files;
-- Excel (`.xls` and `.xlsx`);
-- gzip-compressed files; and
-- ZIP archives.
-
 Regardless of the source format, the component writes the extracted dataset to a **Parquet file** for use by downstream pipeline components.
 
-## Data Integration
+## Data Integration and Preprocessing
 
 | Component | Purpose | Input | Parameters | Output |
 |---|---|---|---|---|
 | **Merge Data** | Combines two datasets using a common column and a selected relational join method. | Two Parquet datasets containing the merge column. | `mergeOn`: common column.<br>`mergeHow`: `left`, `right`, `inner`, or `outer`. | Merged Parquet dataset. |
-| **Merge on Date** | Aligns two datasets using identifier and date columns, selecting the nearest, next, or previous matching record. | Two Parquet datasets containing the merge and date columns. | `mergeOn`: common identifier.<br>`dateColBase`: date column in the base dataset.<br>`dateColMerge`: date column in the second dataset.<br>`mergeDirection`: `nearest`, `forward`, or `backward`. | Date-aligned Parquet dataset. |
-
-## Data Preprocessing
-
-| Component | Purpose | Input | Parameters | Output |
-|---|---|---|---|---|
+| **Merge on Date** | Aligns two datasets using identifier and date columns. | Two Parquet datasets containing the merge and date columns. | `mergeOn`: common identifier.<br>`dateColBase`: date column in the base dataset.<br>`dateColMerge`: date column in the second dataset.<br>`mergeDirection`: `nearest`, `forward`, or `backward`. | Date-aligned Parquet dataset. |
 | **Count Measurement** | Counts records within groups and creates a measurement-count feature. | Parquet dataset containing the grouping column. | `groupby`: column used to group records.<br>`outputColname`: name of the generated count column. | Parquet dataset containing the measurement count. |
 | **Extract Measurement** | Selects records representing a specified measurement. | Long-format Parquet dataset containing measurement names and values. | `nameCol`: measurement-name column.<br>`valueCol`: measurement-value column.<br>`measurementName`: measurement to extract.<br>`matchType`: `startswith`, `exact`, or `contains`. | Parquet dataset containing the selected measurement. |
 | **Expand Feature** | Expands compound or repeated feature values into separate columns. | Parquet dataset containing the feature to expand. | `feature`: feature column.<br>`expandOn`: separator or expansion criterion. | Expanded Parquet dataset. |
@@ -69,8 +48,6 @@ Regardless of the source format, the component writes the extracted dataset to a
 | **OMOP CDM Transformer** | Maps source healthcare data to OMOP Common Data Model concepts and produces transformation metadata. | Source Parquet dataset, OMOP concept file, and optional column-description file. | `baseInput`, `conceptFile`, `userColumnDescriptions`, `nrows`, `omopHubApiKey`, `similarityThreshold`, `enableNoteNlp`, `useEmbeddings`, `nlpEntityTypes`, `nlpMaxWords`, `exportFormat`, `embeddingModel`, `standardOnly`, `omopOutputDir`, `outputMetadata`, `outputOmopMapping` | OMOP-formatted tables, metadata, and mapping results. |
 | **OMOP Table Merger** | Combines generated OMOP tables and records information about the resulting CDM package. | Directory containing generated OMOP tables. | `omopTablesOutputDir`, `sharedFolder`, `format`, `cdmHolder`, `vocabularyVersion`, `cdmEtlReference`, `sourceDocumentationReference` | Consolidated OMOP CDM output. |
 
-The OMOP CDM Transformer uses Parquet files by default, including `patients_eICU.parquet`, `CONCEPT.parquet`, and Parquet outputs for transformation metadata and OMOP mappings.
-
 ## Privacy-Preserving Transformations
 
 | Component | Purpose | Input | Parameters | Output |
@@ -81,8 +58,6 @@ The OMOP CDM Transformer uses Parquet files by default, including `patients_eICU
 | **VAE Synthesizer** | Generates synthetic tabular data using a variational autoencoder. | Preprocessed numerical or encoded Parquet dataset. | `epochs` (default: `400`), `batchSize` (default: `100`), `lossFactor` (default: `2`). | Synthetic Parquet dataset. |
 | **CTGAN Synthesizer** | Generates synthetic tabular data using a conditional generative adversarial network. | Preprocessed Parquet dataset. | `epochs` (default: `400`), `batchSize` (default: `100`). | Synthetic Parquet dataset. |
 | **CopulaGAN Synthesizer** | Generates synthetic tabular data by combining copula-based modelling with a generative adversarial network. | Preprocessed Parquet dataset. | `epochs` (default: `400`), `batchSize` (default: `100`). | Synthetic Parquet dataset. |
-
-Removing direct identifiers alone does not establish anonymity. Quasi-identifiers, sensitive attributes, intended use, and applicable governance requirements must also be considered.
 
 ## Evaluations
 
@@ -100,8 +75,6 @@ Removing direct identifiers alone does not establish anonymity. Quasi-identifier
 | **T-Closeness** | Measures the distance between sensitive-attribute distributions within equivalence classes and the complete dataset. | Anonymized dataset. | `quasiIdentifiers`, `sensitiveAttributes`, `expectedT` (default: `0.2`). | T-closeness results. |
 | **Utility Evaluation** | Compares downstream machine-learning performance obtained from original and transformed data. | Original and transformed datasets. | `featureColumns`, `targetCol`, `trainSize` (default: `0.7`), `modelName` (default: `SVC`), `metrics` (default: `accuracy,f1,roc_auc`). | Predictive-utility metrics and comparisons. |
 
-Privacy, statistical fidelity, data quality, analytical utility, and overfitting risk should be interpreted together. A strong result in one dimension does not demonstrate suitability in every other dimension.
-
 ## Image Pipeline Components
 
 | Component | Purpose | Input | Parameters | Output |
@@ -112,16 +85,5 @@ Privacy, statistical fidelity, data quality, analytical utility, and overfitting
 | **Synthetic Image Generation** | Uses a trained image model to generate synthetic medical images. | Trained model checkpoint. | `input` (default: `trained_model/checkpoint_latest.pt`), `numImages` (default: `1000`), `batchSize` (default: `64`), `output` (default: `synthetic_images`). | Synthetic medical-image collection. |
 | **Image Statistical Evaluation** | Compares real and generated medical images using statistical image-generation metrics. | Preprocessed real images and a trained model checkpoint. | `input1`, `input2`, `numReal` (default: `1000`), `numFake` (default: `1000`), `batchSize` (default: `32`), `kidSubsetSize` (default: `500`). | Statistical image-evaluation results. |
 | **Image Privacy Evaluation** | Evaluates similarity and privacy risks between training, reference, and generated images. | Preprocessed images and a trained model checkpoint. | `input1`, `input2`, `referenceSplit` (default: `test`), `numTrainReal` (default: `2000`), `numReferenceReal` (default: `2000`), `numFake` (default: `2000`), `batchSize` (default: `32`), `numWorkers` (default: `0`). | Image privacy-evaluation results. |
-
-## Selecting and Connecting Components
-
-When constructing a pipeline:
-
-1. Select an ingestion component appropriate for the data source.
-2. Integrate datasets when multiple sources or tables are required.
-3. Apply the necessary preprocessing operations.
-4. Select de-identification, anonymization, synthetic data generation, or an appropriate combination of these transformations.
-5. Add evaluations that address privacy, statistical fidelity, data quality, utility, and overfitting where relevant.
-6. Confirm that the format and columns produced by each component satisfy the input requirements of the following component.
 
 For step-by-step instructions, see **[Create a Pipeline](create-pipelines.md)**.
