@@ -1,6 +1,6 @@
 # INSAFEDARE Web Application
 
-The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data-processing pipelines.The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multidimensional evaluation**.
+The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data pipelines.The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multidimensional evaluation**.
 
 ---
 
@@ -45,19 +45,6 @@ Create, configure, generate, and execute a pipeline using the graphical interfac
 If you encounter a problem while installing, launching, or using INSAFEDARE, consult the troubleshooting guide.
 
 ➡️ **[Troubleshooting Guide](docs/troubleshooting.md)**
-
----
-
-## Documentation
-
-| Guide | Description |
-|---|---|
-| **[Download Application](docs/download-guide.md)** | Download the latest INSAFEDARE release |
-| **[Install Prerequisites](docs/prerequisites.md)** | Install Java and Docker on Linux, Windows, or macOS |
-| **[Launch Application](docs/launch-guide.md)** | Start the required service and launch INSAFEDARE |
-| **[Upload Pipelines](docs/upload-pipelines.md)** | Import and test existing pipelines |
-| **[Create Pipelines](docs/create-pipelines.md)** | Build and configure new pipelines |
-| **[Troubleshooting](docs/troubleshooting.md)** | Resolve common installation and runtime problems |
 
 ---
 
