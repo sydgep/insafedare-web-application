@@ -21,9 +21,9 @@ At pipeline level, users configure the directories used to locate source data an
 
 | Component | Purpose | Input Parameters | Output |
 |---|---|---|---|
-| **File Extraction** | Ingests data from supported source files, optionally extracts selected columns. |`inputFile`: source filename (supported format: .csv, .json, .parquet, .txt, .xls, .xlsx, .gzip and .zip). <br>`columns`: columns to retain; all columns are retained when none are specified. | Name.parquet (Name is specified by the user) |
+| **File Extraction** | Ingests data from supported source files, optionally extracts selected columns. |`inputFile`: source filename (.csv, .json, .parquet, .txt, .xls, .xlsx, .gzip and .zip). <br>`columns`: columns to retain; all columns are retained when none are specified. | Name.parquet (Name is specified by the user) |
 | **Database Extraction** | Connects to a PostgreSQL database and extracts selected columns from a table. | `host`, `port`, `username`, `password`, `databaseName`, `schema`, `tableName`, `columns` | Name.parquet (Name is specified by the user)|
-| **API Extraction** | Retrieves records from an API response and extracts the requested fields. |`url`: API endpoint.<br>`recordPath`: path to the records in the response.<br>`columns`: fields to retain. | Name.parquet (Name is specified by the user) |
+| **API Extraction** | Retrieves records from an API response and extracts the requested fields. |`url`: API endpoint.<br>`recordPath`: path to the records.<br>`columns`: fields to retain. | Name.parquet (Name is specified by the user) |
 
 Regardless of the source format, the component writes the extracted dataset to a **Parquet file** for use by downstream pipeline components.
 
