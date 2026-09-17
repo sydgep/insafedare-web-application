@@ -4,19 +4,6 @@
 
 INSAFEDARE provides reusable components for constructing tabular-data and medical-image pipelines. Each component performs a defined operation and can be connected to compatible components through the graphical pipeline editor.
 
-## Common Pipeline Configuration
-
-At pipeline level, users configure the directories used to locate source data and store generated results.
-
-| Parameter | Description | Default value |
-|---|---|---|
-| `Name` | Name of the pipeline. | `SynDataPipelines` |
-| `Comments` | Optional description or notes about the pipeline. | — |
-| `Source Directory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
-| `Target Directory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
-| `Capture Metadata` | Enables FAIR-aware metadata capture. | Disabled |
-| `Use DVC` | Enables dataset and output versioning with DVC. | Disabled |
-
 ## Data Ingestion
 
 | Component | Purpose | Input Parameters | Output |
