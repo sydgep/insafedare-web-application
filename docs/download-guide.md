@@ -6,7 +6,7 @@ The application is distributed as a standalone Java FAT JAR through **GitHub Rel
 
 ## Download version v1.0
 
-1. Open the [INSAFEDARE v1.0 release page](https://github.com/sydgep/insafedare-web-application/releases/tag/v1.0).
+1. Open the [INSAFEDARE Application v1.0 release page](https://github.com/sydgep/insafedare-web-application/releases/tag/v1.0).
 2. Locate the **Assets** section. Expand it if necessary.
 3. Download:
 
