@@ -1,8 +1,6 @@
 # INSAFEDARE Web Application
 
-The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data-processing pipelines.
-
-The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multidimensional evaluation**.
+The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data-processing pipelines.The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multidimensional evaluation**.
 
 ---
 
@@ -12,7 +10,7 @@ Follow these steps in order if you are using the application for the first time.
 
 ### 1. Download Application
 
-Download the latest testing version from GitHub Releases.
+Download the latest version from GitHub Releases.
 
 ➡️ **[Download Application](docs/download-guide.md)**
 
@@ -24,7 +22,7 @@ Install **Java 17 or newer** (Java 21 recommended) and **Docker**. Instructions 
 
 ### 3. Launch Application
 
-Start the PostgreSQL service, launch INSAFEDARE, and open it in a web browser.
+Launch the Application and open it in a web browser.
 
 ➡️ **[Launch Application](docs/launch-guide.md)**
 
