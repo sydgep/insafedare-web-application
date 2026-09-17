@@ -16,12 +16,8 @@ The application is distributed as a standalone Java FAT JAR through **GitHub Rel
 
 4. Keep the JAR in an easy-to-find folder, such as `Downloads` or a dedicated `INSAFEDARE` folder.
 
-> If the repository is private, you must sign in to GitHub using an account that has been granted access.
-
 ## What you downloaded
 
 The `.jar` file contains the INSAFEDARE application and its Java dependencies. It is launched from a terminal; it is not opened by double-clicking.
-
-Java and Docker are still required on the computer.
 
 Next: **[Install Prerequisites →](prerequisites.md)**
