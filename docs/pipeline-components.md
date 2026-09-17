@@ -10,12 +10,12 @@ At pipeline level, users configure the directories used to locate source data an
 
 | Parameter | Description | Default value |
 |---|---|---|
-| `name` | Name of the pipeline. | `SynDataPipelines` |
-| `comments` | Optional description or notes about the pipeline. | — |
-| `sourceDirectory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
-| `targetDirectory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
-| `captureMetadata` | Enables FAIR-aware metadata capture. | Disabled |
-| `useDVC` | Enables dataset and output versioning with DVC. | Disabled |
+| `Name` | Name of the pipeline. | `SynDataPipelines` |
+| `Comments` | Optional description or notes about the pipeline. | — |
+| `Source Directory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
+| `Target Directory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
+| `Capture Metadata` | Enables FAIR-aware metadata capture. | Disabled |
+| `Use DVC` | Enables dataset and output versioning with DVC. | Disabled |
 
 ## Data Ingestion
 
@@ -63,17 +63,17 @@ Regardless of the source format, the component writes the extracted dataset to a
 
 | Component | Purpose | Input Parameters | Output |
 |---|---|---|---|
-| **Statistical Evaluation** | Compares the statistical distributions and relationships of original and transformed datasets. | No component-specific parameters. | Statistical evaluation metrics and visualizations |
-| **Data Quality Evaluation** | Evaluates the completeness, validity, consistency, and general quality of a dataset. | No component-specific parameters. | Data-quality metrics and report |
-| **Overfitting Evaluation** | Assesses whether generated data reproduce original training records or patterns too closely. | No component-specific parameters. | Overfitting evaluation metrics and report |
-| **Classical Privacy Evaluation** | Evaluates privacy using quasi-identifiers and sensitive attributes. | `Quasi-Identifiers`: columns that could indirectly identify individuals (default: `Age, Gender`).<br>`Sensitive Attributes`: confidential attributes to protect (default: `Patient_Status`). | Classical privacy evaluation results |
-| **Attribute Inference Attack** | Evaluates whether sensitive attributes can be inferred from known attributes. | `Quasi-Identifiers`, `Sensitive Attributes`.<br>`Attack Model`: machine-learning model used for the attack (default: `random_forest`). | Attribute-inference risk metrics |
-| **Record Linkage Attack** | Estimates whether released records can be linked to original records through quasi-identifiers. | `Quasi-Identifiers`: columns used for record matching (default: `Age, Gender`). | Record-linkage risk metrics |
-| **Distance to Closest Real Record** | Measures the distance between each synthetic record and its closest original record. | No component-specific parameters. | Distance-based privacy metrics |
-| **K-Anonymity** | Verifies whether every quasi-identifier combination is shared by at least the expected number of records. | `Quasi-Identifiers`.<br>`Expected K`: minimum equivalence-class size (default: `5`). | K-anonymity results |
-| **L-Diversity** | Measures sensitive-value diversity within quasi-identifier equivalence classes. | `Quasi-Identifiers`, `Sensitive Attributes`.<br>`Expected L`: minimum required diversity (default: `2`). | L-diversity results |
-| **T-Closeness** | Measures the difference between sensitive-attribute distributions within equivalence classes and the complete dataset. | `Quasi-Identifiers`, `Sensitive Attributes`.<br>`Expected T`: maximum accepted distribution distance (default: `0.2`). | T-closeness results |
-| **Utility Evaluation** | Compares downstream machine-learning performance obtained from original and transformed datasets. | `Feature Columns`: predictor variables.<br>`Target Column`: prediction target.<br>`Train Size`: training proportion (default: `0.7`).<br>`Model Name`: machine-learning model (default: `SVC`).<br>`Metrics`: evaluation metrics (default: `accuracy, f1, roc_auc`). | Predictive-utility metrics and comparison report |
+| **Statistical Evaluation** | Compares the statistical distributions and relationships of original and transformed datasets. | `Input File 1`: original dataset.<br>`Input File 2`: transformed or synthetic dataset. | Name.parquet (Name is specified by the user) |
+| **Data Quality Evaluation** | Compares the quality of original and transformed datasets using measures related to completeness, validity, consistency, and data usability. | `Input File 1`: original dataset.<br>`Input File 2`: transformed or synthetic dataset. | Name.parquet (Name is specified by the user) |
+| **Overfitting Evaluation** | Evaluates whether a synthetic dataset reproduces records or patterns from the original dataset too closely. | `Input File 1`: original dataset.<br>`Input File 2`: synthetic dataset. | Name.parquet (Name is specified by the user) |
+| **Attribute Inference Attack** | Evaluates whether sensitive attributes in a synthetic dataset can be inferred from known quasi-identifying attributes. | `Input File 1`: original dataset.<br>`Input File 2`: synthetic dataset.<br>`Quasi-Identifiers`: attributes assumed to be known to an attacker.<br>`Sensitive Attributes`: confidential attributes the attacker attempts to infer.<br>`Attack Model`: model used to perform the attack (default: `random_forest`). | Name.parquet (Name is specified by the user) |
+| **Record Linkage Attack** | Estimates whether records in a synthetic or transformed dataset can be linked to records in the original dataset using quasi-identifying attributes. | `Input File 1`: original dataset.<br>`Input File 2`: synthetic or transformed dataset.<br>`Quasi-Identifiers`: attributes used to link records. | Name.parquet (Name is specified by the user) |
+| **Distance to Closest Real Record** | Measures the distance between each synthetic record and its closest record in the original dataset to identify potential privacy risks. | `Input File 1`: original dataset.<br>`Input File 2`: synthetic dataset. | Name.parquet (Name is specified by the user) |
+| **Utility Evaluation** | Evaluates the predictive utility of synthetic or transformed data by training a selected classification or regression model and comparing its performance against a real-data baseline using Train-on-Real, Test-on-Real (TRTR) and Train-on-Synthetic, Test-on-Real (TSTR) experiments. The selected model determines whether classification or regression is performed. The selected metrics must be compatible with the model type. | `Input File 1`: original dataset.<br>`Input File 2`: transformed dataset.<br>`Feature Columns`: predictor variables.<br>`Target Column`: variable to predict.<br>`Train Size`: (default: `0.7`).<br>`Model Name`: classification or regression.<br><br>**Classification models:** `LogisticRegression`, `RandomForestClassifier`, `GradientBoostingClassifier`, `SVC`.<br>**Classification metrics:** `accuracy`, `f1`, `roc_auc`.<br><br>**Regression models:** `LinearRegression`, `RandomForestRegressor`, `GradientBoostingRegressor`, `SVR`.<br>**Regression metrics:** `r2`, `rmse`.<br><br> | Name.parquet (Name is specified by the user) |
+| **K-Anonymity** | Verifies whether every quasi-identifier combination is shared by at least the expected number of records. | `Input File 1`: anonymized dataset.<br>`Quasi-Identifiers`: attributes used to form equivalence classes.<br>`Expected K`: minimum required equivalence-class size (default: `5`). | Name.parquet (Name is specified by the user) |
+| **L-Diversity** | Measures whether each quasi-identifier equivalence class contains a sufficient diversity of sensitive values. | `Input File 1`: anonymized dataset.<br>`Quasi-Identifiers`: attributes used to form equivalence classes.<br>`Sensitive Attributes`: confidential attributes evaluated within each class.<br>`Expected L`: minimum required sensitive-value diversity (default: `2`). | Name.parquet (Name is specified by the user) |
+| **T-Closeness** | Measures whether the distribution of a sensitive attribute within each equivalence class remains sufficiently close to its distribution in the complete dataset. | `Input File 1`: anonymized dataset.<br>`Quasi-Identifiers`: attributes used to form equivalence classes.<br>`Sensitive Attributes`: confidential attributes whose distributions are evaluated.<br>`Expected T`: maximum accepted distribution distance (default: `0.2`). | Name.parquet (Name is specified by the user) |
+| **Classical Privacy Evaluation** | Performs a combined classical privacy assessment. | `Input File 1`: anonymized dataset.<br>`Quasi-Identifiers`: attributes that could indirectly identify individuals (default: `Age, Gender`).<br>`Sensitive Attributes`: confidential attributes to protect (default: `Patient_Status`). | Name.parquet (Name is specified by the user) |
 
 ## Image Pipeline Components
 
