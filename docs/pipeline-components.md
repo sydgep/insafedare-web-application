@@ -10,18 +10,18 @@ At pipeline level, users configure the directories used to locate source data an
 
 | Parameter | Description | Default value |
 |---|---|---|
-| `name` | Name of the pipeline. | `SyntheticDataPipeline` |
+| `name` | Name of the pipeline. | `SynDataPipelines` |
 | `comments` | Optional description or notes about the pipeline. | — |
 | `sourceDirectory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
 | `targetDirectory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
-| `captureMetadata` | Enables FAIR-aware metadata capture. | `false` |
-| `useDVC` | Enables dataset and output versioning with DVC. | `false` |
+| `captureMetadata` | Enables FAIR-aware metadata capture. | Disabled |
+| `useDVC` | Enables dataset and output versioning with DVC. | Disabled |
 
 ## Data Ingestion
 
 | Component | Purpose | Input | Parameters | Output |
 |---|---|---|---|---|
-| **File Extraction** | Ingests data from supported source files, optionally extracts selected columns. | CSV, JSON, Parquet, TXT, XLS, or XLSX file. Gzip and ZIP compression are supported. | `inputFile`: source filename. <br>`columns`: columns to retain; all columns are retained when none are specified. | Parquet file containing the selected data. |
+| **File Extraction** | Ingests data from supported source files, optionally extracts selected columns. |`inputFile`: source filename (supported format: .csv, .json, .parquet, .txt, .xls, .xlsx, .gzip and .zip). |  <br>`columns`: columns to retain; all columns are retained when none are specified. | Name.parquet (Name is specified by the user) |
 | **Database Extraction** | Connects to a PostgreSQL database and extracts selected columns from a table. | PostgreSQL database table. | `host`, `port`, `username`, `password`, `databaseName`, `schema`, `tableName`, `columns` | Extracted dataset in Parquet format. |
 | **API Extraction** | Retrieves records from an API response and extracts the requested fields. | API endpoint returning structured data. | `url`: API endpoint.<br>`recordPath`: path to the records in the response.<br>`columns`: fields to retain. | Extracted dataset in Parquet format. |
 
