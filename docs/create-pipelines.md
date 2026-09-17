@@ -4,17 +4,6 @@
 
 INSAFEDARE provides a graphical interface for assembling data-processing components into an executable workflow.
 
-## Typical workflow
-
-1. Create a project.
-2. Create a pipeline inside the project.
-3. Add the required components.
-4. Connect the components in processing order.
-5. Configure the pipeline and component parameters.
-6. Validate the model.
-7. Generate the executable workflow.
-8. Execute and monitor the pipeline.
-
 ## 1. Create a project and pipeline
 
 1. Launch INSAFEDARE and open <http://localhost:8080>.
@@ -22,72 +11,40 @@ INSAFEDARE provides a graphical interface for assembling data-processing compone
 3. Open the project and create a new pipeline.
 4. Give the pipeline a short, descriptive name.
 
-## 2. Add components
+## 2. Configure the pipeline
 
-Choose components according to the workflow you want to build. Available categories can include:
+At pipeline level, users configure the directories used to locate source data and store generated results.
 
-- data ingestion;
-- data integration;
-- preprocessing;
-- direct-identifier removal and anonymization;
-- synthetic data generation;
-- privacy evaluation;
-- statistical evaluation; and
-- utility evaluation.
+| Parameter | Description | Default value |
+|---|---|---|
+| `Name` | Name of the pipeline. | `SynDataPipelines` |
+| `Comments` | Optional description or notes about the pipeline. | — |
+| `Source Directory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
+| `Target Directory` | Directory for intermediate and final pipeline outputs. | `local_volume_mount` |
+| `Capture Metadata` | Enables FAIR-aware metadata capture. | Disabled |
+| `Use DVC` | Enables dataset and output versioning with DVC. | Disabled |
 
-Add only the components needed for the intended use case.
+## 3. Add components and Connect the workflow
 
-## 3. Connect the workflow
+1. From the `Explorer` view (on the left-hand side), click on the three-dots of the `SynDataPipelines` or the name use used.
+2. Click on `New object`, you will see "Create a new object"
+3. Select the component e.g `File Extraction`, (you can expand the inverted triangle too see all the components)
+4. Click on `CREATE`. It will instantiate a block on the Pipeline Diagram View ( At the center).
+5. Go to the Details view (on the right hand-side) to fill in the input parameters of the component.
+6. Add another components and connect them. The output of the first block is directly passed as an input to the subsequent component.
 
-Connect each component's output to the next component's input. A typical pipeline might follow this order:
+Detailed information about the components can be find [Here](pipeline-components.md).
 
-**Ingestion → Integration → Preprocessing → Privacy-preserving operation → Evaluation**
+## 4. Generate code and execute
 
-Ensure that the output format and columns produced by one component are compatible with the next component.
+1. Click on the `three-dots` at the root of the Explorer view
+2. Click on `Generate Code`
+3. Click on `START SERVER` to start the prefect server.
+4. Click on `EXECUTE CODE`
 
-## 4. Configure the pipeline
+## 5. Monitor the pipeline execution on prefect UI
 
-Configure the pipeline-level directories:
-
-- **Source directory:** location of the original input data.
-- **Target directory:** location for intermediate and final outputs.
-
-Then configure each component. Depending on the component, parameters may include:
-
-- input and output filenames;
-- selected or excluded columns;
-- identifiers and join columns;
-- preprocessing strategies;
-- anonymization attributes;
-- synthesis settings such as epochs and batch size; and
-- evaluation targets and metrics.
-
-Paths must exist and be accessible to the application and its Docker containers. Avoid overwriting original datasets; write processed outputs to the target directory.
-
-## 5. Validate and generate
-
-1. Confirm that all required components are connected.
-2. Check that mandatory parameters have values.
-3. Save the pipeline.
-4. Run the validation action, if available.
-5. Run code generation.
-6. Review the generation messages and resolve reported errors before execution.
-
-## 6. Execute and monitor
-
-1. Start the required execution services for the generated workflow.
-2. Execute the generated pipeline.
-3. Follow the task logs to monitor progress.
-4. Inspect intermediate outputs when diagnosing a failed step.
-5. Review the final datasets, reports, plots, and evaluation results in the configured target directory.
-
-## Good practice
-
-- Begin with a small, non-confidential test dataset.
-- Use descriptive component and output names.
-- Keep source data separate from generated outputs.
-- Change one configuration at a time when troubleshooting.
-- Record the pipeline version, component parameters, and Docker image versions used for important experiments.
-- Follow the project's data-governance rules when working with healthcare data.
+1. Access the prefect server from the application or by pasting `http://127.0.0.1:4200` on your web browser.
+2. Go to the configured "Target Directory" to see the outputs files.
 
 For common problems, see the [troubleshooting guide](troubleshooting.md).
