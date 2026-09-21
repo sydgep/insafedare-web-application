@@ -1,4 +1,4 @@
-# Download the INSAFEDARE Web Application
+# Download the Application
 
 [← Back to the main README](../README.md)
 
