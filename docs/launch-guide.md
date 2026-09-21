@@ -1,4 +1,4 @@
-# Launch the INSAFEDARE Web Application
+# Launch the Application
 
 [← Back to the main README](../README.md)
 
