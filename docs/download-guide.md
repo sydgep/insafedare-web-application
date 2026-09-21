@@ -4,20 +4,15 @@
 
 The application is distributed as a standalone Java FAT JAR through **GitHub Releases**. 
 
-## Download version v1.0
+## Released versions
 
-1. Click on [link](https://github.com/sydgep/insafedare-web-application/releases/tag/v1.0).
-2. Locate the **Assets** section. Expand it if necessary.
-3. Download:
+Click to download 
 
-   ```text
-   insafedare-web-application-v1.jar
-   ```
-
+Version [v1](https://github.com/sydgep/insafedare-web-application/releases/download/v1.0/insafedare-web-application-v1.jar) (Released on 13/08/2026)
 
 ## What you downloaded
 
-The `.jar` file contains the INSAFEDARE application and its Java dependencies. It is launched from a terminal; it is not opened by double-clicking.
+The `.jar` file contains the application and its Java dependencies.
 
 Keep the JAR in an easy-to-find folder, such as `Downloads` or a dedicated `INSAFEDARE` folder.
 
