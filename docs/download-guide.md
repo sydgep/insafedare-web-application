@@ -21,4 +21,4 @@ The `.jar` file contains the INSAFEDARE application and its Java dependencies. I
 
 Keep the JAR in an easy-to-find folder, such as `Downloads` or a dedicated `INSAFEDARE` folder.
 
-Next: **[launch Application →](launch-guide.md)**
+Next: **[Launch Application →](launch-guide.md)**
