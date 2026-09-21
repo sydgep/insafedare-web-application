@@ -1,6 +1,6 @@
 # INSAFEDARE Web Application
 
-The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data pipelines.The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multidimensional evaluation**.
+The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data pipelines. The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multi-dimensional evaluations**.
 
 ---
 
@@ -10,7 +10,7 @@ Follow these steps in order if you are using the application for the first time.
 
 ### 1. Download Application
 
-Download the latest version from GitHub Releases.
+Download the latest version from GitHub Releases. 
 
 ➡️ **[Download Application](docs/download-guide.md)**
 
@@ -28,13 +28,13 @@ Launch the Application and open it in a web browser.
 
 ### 4. Upload Pipelines
 
-Import and test an existing or example pipeline without creating one from scratch.
+Import and test an existing or example pipeline without creating one from scratch. 
 
 ➡️ **[Upload Pipelines](docs/upload-pipelines.md)**
 
 ### 5. Create Pipelines
 
-Create, configure, generate, and execute a pipeline using the graphical interface.
+Create, configure, generate, and execute a pipeline using the graphical interface. 
 
 ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
@@ -42,10 +42,8 @@ Create, configure, generate, and execute a pipeline using the graphical interfac
 
 ## Need Help?
 
-If you encounter a problem while installing, launching, or using INSAFEDARE, consult the troubleshooting guide.
+If you encounter a problem while installing, launching, or using INSAFEDARE Application, consult the troubleshooting guide.
 
 ➡️ **[Troubleshooting Guide](docs/troubleshooting.md)**
 
 ---
-
-**INSAFEDARE Web Application — Version v1.0**
