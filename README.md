@@ -4,35 +4,31 @@ The **INSAFEDARE Web Application** provides a graphical environment for creating
 
 ---
 
-## Getting Started
+## 1. Install Prerequisites
 
-Follow these steps in order if you are using the application for the first time.
+Instructions are provided for Linux, Windows, and macOS.
 
-### 1. Download Application
+➡️ **[Install Prerequisites](docs/prerequisites.md)**
+
+## 2. Download Application
 
 Download the latest version from GitHub Releases. 
 
 ➡️ **[Download Application](docs/download-guide.md)**
 
-### 2. Install Prerequisites
-
-Install **Java 17 or newer** (Java 21 recommended) and **Docker**. Instructions are provided for Linux, Windows, and macOS.
-
-➡️ **[Install Prerequisites](docs/prerequisites.md)**
-
-### 3. Launch Application
+## 3. Launch Application
 
 Launch the Application and open it in a web browser.
 
 ➡️ **[Launch Application](docs/launch-guide.md)**
 
-### 4. Upload Pipelines
+## 4. Upload Pipelines
 
 Import and test an existing or example pipeline without creating one from scratch. 
 
 ➡️ **[Upload Pipelines](docs/upload-pipelines.md)**
 
-### 5. Create Pipelines
+## 5. Create Pipelines
 
 Create, configure, generate, and execute a pipeline using the graphical interface. 
 
