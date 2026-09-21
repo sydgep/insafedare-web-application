@@ -2,22 +2,18 @@
 
 [← Back to the main README](../README.md)
 
-INSAFEDARE requires:
+The application requires:
 
 - **Java 17 or newer** — Java 21 is recommended.
-- **Docker** — used to run PostgreSQL in a container.
-- A current web browser such as Firefox, Chrome, Edge, or Safari.
-
-PostgreSQL does **not** need to be installed separately. It is started with Docker in the [launch guide](launch-guide.md).
-
+- **Docker**.
+  
 If Java and Docker are already installed, verify them with:
 
 ```bash
 java -version
 docker --version
 ```
-
-Then continue to [Launch Application](launch-guide.md).
+Then continue to [Download Application](download-guide.md).
 
 ## Linux (Ubuntu or Debian)
 
@@ -111,4 +107,4 @@ java -version
 docker info
 ```
 
-Next: **[Launch Application →](launch-guide.md)**
+Next: **[Download Application →](download-guide.md)**
