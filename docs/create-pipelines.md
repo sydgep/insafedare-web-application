@@ -44,4 +44,10 @@ Detailed information about the available components, their parameters, and outpu
 2. Use the Prefect interface to monitor flow runs, task execution, logs, and errors.
 3. Open the configured `Target Directory` to access the intermediate and final output files.
 
+## 5. Download the Pipeline
+
+1. In the **Explorer** view, click the **⋮** menu next to the project name at the top.
+2. Select **Download**.
+3. Your browser will download the project as a ZIP file. Keep this file if you want to import the pipeline later or share it with a partner.
+
 For solutions to common problems, see the **[Troubleshooting Guide](troubleshooting.md)**.
