@@ -11,7 +11,7 @@ This example contains the artificial benchmark dataset, `raw_data.csv`, and two 
 | Property | Value |
 |---|---|
 | Dataset | Artificial healthcare benchmark (`raw_data.csv`) |
-| Source | Artificial benchmark dataset generated with ChatGPT. |
+| Source | The dataset is generated with ChatGPT; not derived from real patient records. |
 | Format | CSV input |
 | Records | 2,000 artificial patient records |
 | Columns | 13 |
