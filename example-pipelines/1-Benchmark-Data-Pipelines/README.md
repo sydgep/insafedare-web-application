@@ -67,7 +67,7 @@ The thresholds are **configured evaluation criteria**, not claims that the pipel
 
 This pipeline uses CTGAN to generate new artificial records from the de-identified benchmark data. It then compares the synthetic dataset with the original data for statistical fidelity, predictive utility, and privacy risk.
 
-**File Extraction → De-identification → CTGAN synthesis → Statistical fidelity and ML utility evaluation → Privacy evaluation**
+**File Extraction → De-identification → CTGAN synthesis → Statistical fidelity, ML utility & Privacy evaluation**
 
 | Step | Component | Configuration and purpose |
 |---|---|---|
