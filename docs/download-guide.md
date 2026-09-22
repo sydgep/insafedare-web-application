@@ -4,9 +4,7 @@
 
 The application is distributed as a standalone Java FAT JAR through **GitHub Releases**. 
 
-## Released versions
-
-Click to download 
+## Released versions (Click to download)
 
 [Version 1.0](https://github.com/sydgep/insafedare-web-application/releases/download/v1.0/insafedare-web-application-v1.jar) (Released on 13/08/2026)
 
