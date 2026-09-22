@@ -80,4 +80,4 @@ Stopping the container does not delete its stored data.
 
 If a step fails, see the [Troubleshooting Guide](troubleshooting.md).
 
-Next: **[Upload an Existing Pipeline →](upload-pipelines.md)**
+Next: **[Create Pipeline →](create-pipelines.md)**
