@@ -16,11 +16,7 @@ Download the latest version from GitHub Releases.➡️ **[Download Application]
 
 Launch the Application and open it in a web browser. ➡️ **[Launch Application](docs/launch-guide.md)**
 
-## 4. Upload Pipelines
-
-Import and test an existing or example pipeline without creating one from scratch. ➡️ **[Upload Pipelines](docs/upload-pipelines.md)**
-
-## 5. Create Pipelines
+## 4. Create Pipelines
 
 Create, configure, generate, and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
