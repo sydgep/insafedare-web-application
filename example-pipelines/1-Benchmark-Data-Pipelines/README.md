@@ -76,4 +76,41 @@ The thresholds are **configured evaluation criteria**, not claims that the pipel
 
 ## Benchmark Data Pipeline - Synthetic Data Generation
 
-This section will describe the second example pipeline and its generation and evaluation settings.
+This pipeline uses CTGAN to generate new artificial records from the de-identified benchmark data. It then compares the synthetic dataset with the original data for statistical fidelity, predictive utility, and privacy risk.
+
+**File Extraction → De-identification → CTGAN synthesis → Statistical fidelity and ML utility evaluation → Privacy evaluation**
+
+| Step | Component | Configuration and purpose |
+|---|---|---|
+| 1 | **File Extraction** | Ingest `raw.csv` and write a Parquet dataset for subsequent components. |
+| 2 | **De-identification** | Remove `Patient_ID`, `Full_Name`, `Email`, and `Phone` before training the synthesizer. |
+| 3 | **CTGAN Synthesizer** | Train on the de-identified dataset and generate a synthetic dataset. The privacy-preserving output is available in CSV and Parquet formats. |
+| 4 | **Statistical Fidelity Evaluation** | Compare the original and synthetic datasets to assess how well their statistical properties agree. |
+| 5 | **ML Utility Evaluation** | Compare predictive performance using the original-data baseline and the synthetic dataset, with the same features, target, model, split, and metrics as in the anonymization pipeline. |
+| 6 | **Attribute Inference Attack** | Assess how well `Diagnosis` can be inferred using the specified quasi-identifiers and a `random_forest` attack model. |
+| 7 | **Record Linkage Attack** | Evaluate whether synthetic records can be linked to original records using the same quasi-identifiers. |
+| 8 | **Distance to Closest Real Record** | Measure how close synthetic records are to records in the original dataset. |
+
+### ML Utility Settings
+
+| Parameter | Value |
+|---|---|
+| Features | `Age`, `Gender`, `Marital_Status`, `Diagnosis`, `Treatment` |
+| Target | `Outcome` |
+| Model | `SVC` (support vector classifier) |
+| Training proportion | `0.7` |
+| Metrics | `accuracy`, `f1`, `roc_auc` |
+
+The utility evaluation compares **Train on Real, Test on Real (TRTR)** with **Train on Synthetic, Test on Real (TSTR)**. Both modes use held-out original records for testing.
+
+### Privacy Evaluation Settings
+
+The privacy evaluations compare the original and synthetic datasets. Attribute inference and record linkage use the quasi-identifiers `Age`, `Gender`, `Marital_Status`, and `Admission_Date`.
+
+| Evaluation | Configuration |
+|---|---|
+| **Attribute Inference Attack** | Quasi-identifiers: `Age`, `Gender`, `Marital_Status`, `Admission_Date`; sensitive attribute: `Diagnosis`; attack model: `random_forest`. |
+| **Record Linkage Attack** | Quasi-identifiers: `Age`, `Gender`, `Marital_Status`, `Admission_Date`. |
+| **Distance to Closest Real Record** | Original dataset and synthetic dataset; no additional component-specific parameters. |
+
+Review all three results together. Synthetic generation alone does not establish that the resulting records are sufficiently private for release.
