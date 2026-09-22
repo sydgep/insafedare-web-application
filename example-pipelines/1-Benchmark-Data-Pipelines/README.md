@@ -1,40 +1,29 @@
 # Benchmark Data Pipelines
 
-This example contains the artificial benchmark dataset, `raw.csv`, and two INSAFEDARE pipelines:
-
-1. **Benchmark Data Pipeline - Anonymization**
-2. **Benchmark Data Pipeline - Synthetic Data Generation**
-
-Both pipelines begin with the same source dataset. The first transforms the original records through de-identification and anonymization. The second generates new synthetic records from the benchmark data.
+This example contains the artificial benchmark dataset, `raw_data.csv`, and two pipelines (`Benchmark Data Pipeline - Anonymization` and  `Benchmark Data Pipeline - Synthetic Data Generation`).
 
 ## Dataset and Source
 
-`raw.csv` is a **purpose-built artificial healthcare benchmark**, created to test and demonstrate the INSAFEDARE data-processing and privacy-evaluation components. Its names, contact details, diagnoses, treatments, and outcomes are synthetic examples; the file does not originate from a hospital or patient-record system. The records resemble a simple admissions dataset so that transformations and evaluations can be inspected easily.
-
-The dataset contains **2,000 records and 13 columns**. The same source file is used by both example pipelines. File Extraction ingests the CSV and produces a Parquet file for downstream processing.
+`raw_data.csv` is a **purpose-built artificial healthcare benchmark**, created to test and demonstrate the components developed within the INSAFEDARE project. Its names, contact details, diagnoses, treatments, and outcomes are synthetic examples; the file does not originate from a hospital or patient-record system. The records resemble a simple admissions dataset so that transformations and evaluations can be inspected easily.
 
 ### Dataset Metadata
 
 | Property | Value |
 |---|---|
-| Dataset | Artificial healthcare benchmark (`raw.csv`) |
-| Source | Generated specifically for the INSAFEDARE/SYDGEP benchmark; no external clinical data source |
-| Format | CSV input; Parquet is used between pipeline components |
+| Dataset | Artificial healthcare benchmark (`raw_data.csv`) |
+| Source | Artificial benchmark dataset generated with ChatGPT. |
+| Format | CSV input |
 | Records | 2,000 artificial patient records |
 | Columns | 13 |
-| Unit of observation | One artificial patient record |
-| Prediction target | `Outcome` |
 | Direct identifiers | `Patient_ID`, `Full_Name`, `Email`, `Phone` |
 | Quasi-identifiers in the source dataset | `Age`, `Gender`, `ZIP_Code`, `Marital_Status`, `Occupation`, `Admission_Date` |
 | Sensitive attributes | `Diagnosis`, `Treatment`, `Outcome` |
-
-The direct identifiers are **invented values** included to exercise the de-identification component. In the anonymization pipeline, the privacy tests use the selected quasi-identifiers `Age`, `Gender`, `Marital_Status`, and `Admission_Date`, with `Diagnosis` as the sensitive attribute for diversity and closeness tests.
 
 ## Benchmark Data Pipeline - Anonymization
 
 This pipeline transforms the original records and then evaluates the result against the ingested source data. Its stages are:
 
-**File Extraction → De-identification → Age anonymization → Admission date anonymization → Statistical fidelity and ML utility evaluation → Privacy evaluation**
+**File Extraction → De-identification → Anonymization (Age & Admission date) → Evaluations (Statistical , Utility & Privacy)**
 
 | Step | Component | Configuration and purpose |
 |---|---|---|
