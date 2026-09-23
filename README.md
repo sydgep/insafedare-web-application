@@ -1,6 +1,6 @@
-# INSAFEDARE Web Application
+# INSAFEDARE Application
 
-The **INSAFEDARE Web Application** provides a graphical environment for creating, configuring, and executing data pipelines. The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multi-dimensional evaluations**.
+The **INSAFEDARE Application** provides a graphical environment for creating, configuring, and executing data pipelines. The application supports workflows involving **data ingestion, integration, preprocessing, privacy-preserving transformations (de-identification, anonymization, and synthetic data generation), and multi-dimensional evaluations**.
 
 ---
 
