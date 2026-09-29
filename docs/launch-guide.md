@@ -2,7 +2,7 @@
 
 [← Back to the main README](../README.md)
 
-Before starting, [install Java and Docker](prerequisites.md) and [download the application JAR](download-guide.md). Make sure **Docker is running**.
+Before proceeding, make sure you [install Java and Docker](prerequisites.md), [download the application JAR](download-guide.md) and **Docker is running**.
 
 ## Open the JAR Folder in a Terminal
 
