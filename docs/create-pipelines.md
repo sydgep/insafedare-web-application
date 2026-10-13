@@ -17,7 +17,7 @@
 | `Comments` | Optional description or notes about the pipeline. | — |
 | `Source Directory` | Directory containing source datasets and other required inputs. | `./Datasets/` |
 | `Target Directory` | Directory used to store intermediate and final pipeline outputs. | `local_volume_mount` |
-| `Capture Metadata` | Enables FAIR-aware metadata capture (optional). | Disabled |
+| `Capture Metadata` | Enables FAIR-aware metadata capture. [Get your Bioportal API Key](https://bioportal.bioontology.org/accounts/new). | Disabled |
 | `Use DVC` | Enables dataset and output versioning with DVC (optional). | Disabled |
 
 ### Add and Connect Components
