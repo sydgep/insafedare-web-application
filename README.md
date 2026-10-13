@@ -20,6 +20,12 @@ Launch the Application and open it in a web browser. ➡️ **[Launch Applicatio
 
 Create, configure, generate, and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
+## 5. Configure the Intelligent Recommendation System
+This feature supports pipeline design with AI-assisted recommendations. ➡️ **[Configure the Intelligent Recommendation System](docs/configure-intelligent-recommender)**
+
+## 6. Create an Assurance Case
+Learn how to structure an assurance case. ➡️ **[Create Assurance case](docs/create-assurance-case)**
+
 ---
 
 ## Need Help?
