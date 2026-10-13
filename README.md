@@ -21,7 +21,8 @@ Launch the Application and open it in a web browser. ➡️ **[Launch Applicatio
 Create, configure, generate, and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
 ## 5. Configure the Intelligent Recommendation System
-Configure the intelligent recommendation system to enable AI-assisted recommendations during graphical pipeline design. The guide covers the required models, service configuration, and verification steps.
+Configure the intelligent recommendation system to enable AI-assisted recommendations during graphical pipeline design.
+
 ➡️ **[Configure the Intelligent Recommendation System](docs/configure-intelligent-recommender.md)**
 
 ## 6. Create an Assurance Case
