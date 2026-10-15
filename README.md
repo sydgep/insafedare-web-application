@@ -6,7 +6,7 @@ The **INSAFEDARE Application** provides a graphical environment for creating, co
 
 ## 1. Install Prerequisites
 
-Install Java and Docker before using the application for the first time. You only need to do this once. ➡️ **[Install prerequisites](docs/prerequisites.md)**
+Install Java and Docker before using the application. ➡️ **[Install prerequisites](docs/prerequisites.md)**
 
 ## 2. Download Application
 
