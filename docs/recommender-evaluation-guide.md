@@ -1,95 +1,21 @@
-# Hands-On Evaluation Guide: INSAFEDARE Intelligent Recommender
+# Intelligent Recommender Evaluation Guide
 
-This document explains how to set up, use, and evaluate the INSAFEDARE recommender system. The
-recommender is an LLM-based assistant, embedded in the INSAFEDARE modelling platform, that
+This document explains how to test, use, and evaluate the intelligent recommender system. The recommender is an LLM-based assistant, embedded in the INSAFEDARE web application, that
 reviews synthetic-data pipelines and assurance cases and suggests improvements.
-
-The goal is that this document alone is enough to do the whole evaluation. Some of this material also appears in the D5.3
-deliverable, but it is restated here so you don't have to go looking for it.
-
-Audience: developers, researchers, and external reviewers. Sections marked **[INTERNAL]** only
-apply if you have the source repository. External reviewers who received the packaged
-application can skip them.
-
-Time budget: expect 30 to 60 minutes of setup (mostly downloads), then 10 to 20 minutes per
-scenario. Doing everything takes about 2 to 3 hours. If you are short on time, scenarios 1, 2,
-4 and 6 make a decent one-hour pass.
 
 ---
 
-## 1. What you need
+## Starting the application
 
-| Requirement | Details |
-|---|---|
-| OS | Linux, macOS, or Windows (commands below are for Linux/macOS, but the same tools exist on Windows) |
-| Java | JDK 17 or newer (check with `java -version`) |
-| Docker | Only used to run the PostgreSQL database |
-| Ollama | Local LLM runtime, serves the model at `localhost:11434` |
-| Disk | About 10 GB free (the LLM model is around 8 GB) |
-| GPU | Strongly recommended: an NVIDIA GPU with 8 GB or more of VRAM, or Apple Silicon with 16 GB or more of unified memory. Everything works without a GPU, but each answer will take 10+ minutes instead of 1 to 4. On a 6 GB GPU, expect 2 to 4 minutes per answer. |
-| Network | Only needed during setup for downloads. After that, the application and the LLM run entirely on your machine and no data is sent anywhere. |
-
-## 2. Environment setup
-
-### 2.1 Install Docker
-
-On Linux, follow https://docs.docker.com/engine/install/ for your distribution, then run
-`sudo usermod -aG docker $USER` and log out and back in so `docker` works without sudo. On
-macOS and Windows, install Docker Desktop from https://www.docker.com/products/docker-desktop/.
-
-To verify: `docker run hello-world` should print a success message.
-
-### 2.2 Install Ollama and pull the models
-
-Ollama is what runs the language model locally.
-
-On Linux: `curl -fsSL https://ollama.com/install.sh | sh`. If you would rather not pipe a
-script into your shell, the download page at https://ollama.com/download has manual install
-instructions. On macOS and Windows, use the installer from that same page.
-
-Then pull the two models the application needs. This is a one-time download of roughly 8 GB:
+Start the application like this:
 
 ```bash
-ollama pull gemma4:12b        # the chat model that answers questions
-ollama pull nomic-embed-text  # the embedding model used for semantic search
-```
-
-To verify Ollama is up and the models are there:
-
-```bash
-curl -s http://localhost:11434/api/version   # should print a version JSON
-ollama list                                  # should list both models
-```
-
-### 2.3 Start the PostgreSQL database
-
-The application stores projects, models, and chat history in PostgreSQL on port 5433:
-
-```bash
-docker run -p 5433:5432 --name insafedare-postgres \
-    -e POSTGRES_USER=dbuser \
-    -e POSTGRES_PASSWORD=dbpwd \
-    -e POSTGRES_DB=sirius-web-db \
-    -d postgres:16
-```
-
-You only do this once. After a reboot, `docker start insafedare-postgres` brings it back. If
-you ever want to wipe everything and start fresh, run `docker rm -f insafedare-postgres` and
-then the `docker run` command again.
-
-## 3. Starting the application
-
-### 3.1 From the packaged JAR
-
-If you received (or built) a single self-contained JAR file. Start it like this:
-
-```bash
-java -jar insafedare-pipeline-2026.1.0.jar --insafedare.evaluation.enabled=true
+java -jar insafedare-web-application-<version>.jar --insafedare.evaluation.enabled=true
 ```
 
 The `--insafedare.evaluation.enabled=true` flag turns on evaluation mode. It adds two things to
 the chat view that you will use during the review: a scoring panel under each answer, and an
-"export evaluation bundle" button (see sections 7 and 8). The application works fine without
+"export evaluation bundle" button. The application works fine without
 the flag, but collecting your results is much easier with it, so please keep it on.
 
 The first start takes a few extra minutes because the application builds a semantic search
@@ -97,43 +23,17 @@ index over its safety ontology, using the embedding model. Ollama must already b
 that point. Later starts reuse the saved index (it lives under `~/.insafedare/`).
 
 Once the log settles down, open http://localhost:8080 in a browser.
+### Quick health check
 
-### 3.2 From source **[INTERNAL]**
-
-With the repository checked out:
-
-```bash
-./insafedare.sh -b          # build frontend + backend fat JAR (first time, or after changes)
-./insafedare.sh -m dev      # start the PostgreSQL container and the application
-```
-
-The script does not pass extra flags to the application, so to run with evaluation mode, start
-the JAR directly instead:
-
-```bash
-java -jar backend/application/insafedare-pipeline/target/insafedare-pipeline-2026.1.0.jar \
-    --insafedare.evaluation.enabled=true
-```
-
-### 3.3 Quick health check
-
-- http://localhost:8080 shows the INSAFEDARE start page.
 - `curl -s http://localhost:8080/api/insafedare/evaluation/status` returns `{"enabled":true}`
   when evaluation mode is on.
 - `curl -s http://localhost:11434/api/ps` shows which model is loaded (after your first
   question). The `size_vram` field tells you how much of the model sits on the GPU.
 
-## 4. Reaching the recommender
+## Reaching the recommender
 
-1. On http://localhost:8080, create a new project and pick the
-   **INSAFEDARE Assurance & Pipeline** template. This gives you a project with an empty
-   pipeline model (`SynDataPipelines`) and an empty assurance case (`MainAssuranceCase`).
-2. On the project card, click the **"..."** button, then **"Open Sirius"**. This opens the
-   Sirius Web modelling workbench.
-3. In the workbench, look at the right sidebar. The last icon is the **Recommender** chat
-   view. Click it to open the panel.
-4. To give the recommender something to look at, select the pipeline (or assurance) document
-   in the explorer on the left and open its diagram. The recommender reasons about the models
+1. In the workbench, look at the right sidebar. The last icon is the **Recommender** chat view. Click it to open the panel.
+2. To give the recommender something to look at, select the pipeline (or assurance) in the explorer on the left and open its diagram. The recommender reasons about the models
    in the currently selected document.
 
 ### What is in the chat view
@@ -170,7 +70,7 @@ content of your diagram, are injected into the prompt. The LLM's job is to expla
 prioritise these grounded facts, and to add its own judgement on top. It is not supposed to
 guess the structure. Your job as a reviewer is to judge how well it does that.
 
-## 5. Warm-up (10 minutes, not scored)
+##  Warm-up (10 minutes, not scored)
 
 Before scoring anything, get a feel for the tool:
 
@@ -182,7 +82,7 @@ Before scoring anything, get a feel for the tool:
 If answers take longer than about 5 minutes, jump to the troubleshooting section (section 10).
 Your model is probably running on CPU.
 
-## 6. Evaluation scenarios
+## Evaluation scenarios
 
 Each scenario tells you (a) what to build in the diagram, (b) what to ask (please use the
 exact question), and (c) what to look for. After each answer, score it with the rubric panel
@@ -319,7 +219,7 @@ After the scripted scenarios, build or modify a model that looks like your real 
 ask the questions you would actually ask. Score those answers too. Unscripted expert usage is
 the most valuable feedback this evaluation can produce.
 
-## 7. Scoring: the rubric
+## Scoring: the rubric
 
 In evaluation mode there is a "Rubric feedback" panel under every answer, with seven questions
 scored Yes / Partial / No, plus a free-text comment. Score every answer you evaluate right
@@ -345,7 +245,7 @@ latency that bothered you, a particularly good or bad phrase (quote it).
 If you are running without evaluation mode, keep the same scores per scenario in a text file
 and send that instead. Evaluation mode is much preferred though.
 
-## 8. Sending your results back
+## Sending your results back
 
 When you are done, meaning all scenarios are scored and your comments are written:
 
@@ -360,40 +260,6 @@ exact context the model was given (which includes your model contents and any at
 documents), your scores and comments, and environment information (application version, model
 name, Ollama version). Nothing is uploaded automatically anywhere. Nothing leaves your machine
 until you send the files yourself.
-
-## 9. Automated test suites **[INTERNAL]**
-
-The scenarios above also exist as automated tests in the repository. You do not need to run
-them for the human evaluation, but for completeness:
-
-```bash
-cd backend/application
-
-# Deterministic suites (no LLM, no network), runs in any ordinary build:
-mvn -pl insafedare-pipeline-application -am test
-
-# Live-model suite (needs Ollama + gemma4:12b; takes 30-45 min; writes Markdown
-# reports with grounding metrics to target/recommender-eval/<timestamp>/):
-mvn -pl insafedare-pipeline-application -am test \
-    -Dtest=RecommenderLiveScenarioTests -Dinsafedare.eval.llm=true \
-    -Dsurefire.failIfNoSpecifiedTests=false
-```
-
-Expected result: all tests pass, with 6 tests deliberately skipped. The skipped ones document
-a known, filed retrieval-ranking limitation and will be re-enabled when it is fixed.
-
-## 10. Troubleshooting
-
-| Symptom | Cause and fix |
-|---|---|
-| Answers take 10+ minutes | The model is running on CPU. Check `curl -s localhost:11434/api/ps`: if `size_vram` is 0 or small, free up GPU memory (close other GPU applications) and retry, or accept the slower pace. |
-| "Recommender unavailable" or connection error in chat | Ollama is not running, or the model is missing. `curl -s localhost:11434/api/version` must answer, and `ollama list` must show `gemma4:12b`. |
-| Application fails to start, database errors in the log | The PostgreSQL container is not running: `docker start insafedare-postgres`. If port 5433 is already taken, stop whatever uses it, or remove the old container (`docker rm -f insafedare-postgres`) and recreate it. |
-| First start is very slow | Normal, and only happens once: the semantic index over the ontology is being built. Requires `nomic-embed-text` to be pulled. |
-| Port 8080 already in use | Stop the other service, or start the JAR with `--server.port=8081` and use that URL instead. |
-| Truncation banner appears | The context window filled up (very large models or documents). Note it in your comments and ask a shorter, more focused question. |
-| No rubric panel, no export button | Evaluation mode is off. Restart the JAR with `--insafedare.evaluation.enabled=true`. You can check with `curl -s localhost:8080/api/insafedare/evaluation/status`. |
-| Want a completely clean slate | Stop the app, `docker rm -f insafedare-postgres`, recreate the container (section 2.3), restart the app. This erases all projects and conversations. |
 
 ---
 
