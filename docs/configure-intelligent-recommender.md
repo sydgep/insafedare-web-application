@@ -176,6 +176,4 @@ Then verify the installed models with `ollama list`.
 
 Free up space or configure Ollama to use a drive with sufficient capacity. Retry the model download after verifying that the storage configuration is correct.
 
-
-For additional assistance, consult the [Ollama documentation](https://docs.ollama.com/) or the INSAFEDARE project documentation.
-Next: **[Create an Assurance Case →](create-assurance-case.md)**
+Next: **[Test and evaluate the intelligent recommender →](recommender-evaluation-guide.md)**
