@@ -6,7 +6,7 @@ The **INSAFEDARE Application** provides a graphical environment for creating, co
 
 ## 1. Install Prerequisites
 
-Install Java and Docker before using the application for the first time. You only need to do this once. Instructions are provided for Linux, Windows, and macOS. ➡️ **[Install prerequisites](docs/prerequisites.md)**
+Install Java and Docker before using the application for the first time. You only need to do this once. ➡️ **[Install prerequisites](docs/prerequisites.md)**
 
 ## 2. Download Application
 
@@ -16,17 +16,13 @@ Download the latest version from GitHub Releases.➡️ **[Download Application]
 
 Launch the Application and open it in a web browser. ➡️ **[Launch Application](docs/launch-guide.md)**
 
-## 4. Create Pipelines
+## 4. Create Pipelines and Assurance Case
 
-Create, configure, generate, and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
+a. Create and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
-## 5. Configure the Intelligent Recommendation System
-Configure the intelligent recommendation system to enable AI-assisted recommendations during graphical pipeline design.
+b. Create an assurance case. ➡️ **[Assurance Portal](docs/create-assurance-case.md)**
 
-➡️ **[Configure the Intelligent Recommendation System](docs/configure-intelligent-recommender.md)**
-
-## 6. Create an Assurance Case
-Learn how to structure an assurance case. ➡️ **[Create Assurance case](docs/create-assurance-case.md)**
+c. Optionally, activate an AI-assisted recommendations. ➡️ **[Intelligent Recommendation System](docs/configure-intelligent-recommender.md)**
 
 ---
 
