@@ -20,12 +20,6 @@ The application supports:
 
 Pipeline components cover data ingestion, integration, preprocessing, privacy-preserving transformations, synthetic data generation, and multidimensional evaluation.
 
-Related documentation:
-
-- **[Create a Pipeline](create-pipelines.md)**
-- **[Upload an Existing Pipeline](upload-pipelines.md)**
-- **[Pipeline Components](pipeline-components.md)**
-
 ## 2. FAIR-Aware Metadata Capture
 
 INSAFEDARE captures metadata throughout pipeline design and execution to improve the **findability, accessibility, interoperability, and reusability** of datasets and processing results.
