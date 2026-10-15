@@ -23,12 +23,6 @@ index over its safety ontology, using the embedding model. Ollama must already b
 that point. Later starts reuse the saved index (it lives under `~/.insafedare/`).
 
 Once the log settles down, open http://localhost:8080 in a browser.
-### Quick health check
-
-- `curl -s http://localhost:8080/api/insafedare/evaluation/status` returns `{"enabled":true}`
-  when evaluation mode is on.
-- `curl -s http://localhost:11434/api/ps` shows which model is loaded (after your first
-  question). The `size_vram` field tells you how much of the model sits on the GPU.
 
 ## Reaching the recommender
 
