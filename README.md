@@ -18,7 +18,7 @@ Launch the Application and open it in a web browser. ➡️ **[Launch Applicatio
 
 ## 4. Create Pipelines and Assurance Case
 
-a. Create and execute a pipeline using the graphical interface. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
+a. Create a pipeline. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
 b. Create an assurance case. ➡️ **[Assurance Portal](docs/create-assurance-case.md)**
 
