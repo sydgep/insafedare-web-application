@@ -267,3 +267,6 @@ until you send the files yourself.
 `nomic-embed-text` on Ollama. The scenario set mirrors the scenario catalogue and evaluation
 strategy of deliverable D5.3. The deliverable presents the same material in formal form, but
 this guide is meant to be sufficient on its own.*
+
+[← Back to the main README](../README.md)
+
