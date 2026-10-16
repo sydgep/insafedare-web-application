@@ -6,7 +6,7 @@ Before proceeding, make sure you [install Java and Docker](prerequisites.md), [d
 
 ## Open the JAR Folder in a Terminal
 
-Open a terminal and change to the folder containing `insafedare-web-application-v3.jar`.
+Open a terminal and change to the folder containing `insafedare-web-application-v4.jar`.
 
 **Linux and macOS:** If the JAR is in your Downloads folder, run:
 
@@ -45,7 +45,7 @@ The response should say that PostgreSQL is **accepting connections**.
 From the folder containing the JAR, run:
 
 ```bash
-java -jar insafedare-web-application-v3.jar
+java -jar insafedare-web-application-v4.jar
 ```
 
 Keep the terminal open while using the application. Once startup is complete, open <http://localhost:8080> in your browser.
@@ -61,7 +61,7 @@ docker start insafedare-postgres
 From the folder containing the JAR, launch the application:
 
 ```bash
-java -jar insafedare-web-application-v3.jar
+java -jar insafedare-web-application-v4.jar
 ```
 
 Open <http://localhost:8080> in your browser.
