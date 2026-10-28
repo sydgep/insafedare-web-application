@@ -22,7 +22,7 @@ a. Create a pipeline. ➡️ **[Create Pipelines](docs/create-pipelines.md)**
 
 b. Create an assurance case. ➡️ **[Assurance Portal](docs/create-assurance-case.md)**
 
-c. Activate an AI-assisted recommendations. ➡️ **[Intelligent Recommendation System](docs/configure-intelligent-recommender.md)**
+c. Activate an AI-assisted recommendations. ➡️ **[Intelligent Recommender](docs/configure-intelligent-recommender.md)**
 
 ---
 
