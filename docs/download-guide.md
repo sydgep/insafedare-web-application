@@ -6,7 +6,9 @@ The application is distributed as a standalone Java FAT JAR through **GitHub Rel
 
 ## Released versions (Click to download)
 
-[Version 6.0](https://github.com/sydgep/insafedare-web-application/releases/download/v6.0/insafedare-web-application-v6.jar) (Released on 04/11/2026) - Latest
+[Version 7.0](https://github.com/sydgep/insafedare-web-application/releases/download/v7.0/insafedare-web-application-v7.jar) (Released on 13/11/2026) - Latest
+
+[Version 6.0](https://github.com/sydgep/insafedare-web-application/releases/download/v6.0/insafedare-web-application-v6.jar) (Released on 04/11/2026) 
 
 [Version 5.0](https://github.com/sydgep/insafedare-web-application/releases/download/v5.0/insafedare-web-application-v5.jar) (Released on 28/10/2026)
 
